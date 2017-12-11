@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171208064003) do
     t.inet     "ipadd"
     t.string   "use",        default: "free"
     t.integer  "status",     default: 0,      null: false
-    t.integer  "type"
+    t.integer  "dbtype"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end

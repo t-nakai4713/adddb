@@ -44,5 +44,5 @@ group :development, :test do
 end
 
 gem 'jquery-turbolinks'
-gem 'bootstrap'
+gem 'twitter-bootstrap-rails'
 
