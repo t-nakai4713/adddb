@@ -1,0 +1,46 @@
+<h1>アドレス一覧</h1>
+
+<table class="table table-hover table-condensed">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>IPアドレス</th>
+      <th>用途</th>
+      <th>割当状況</th>
+      <th>更新者</th>
+      <th>更新日時</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @addresses.order('id').each do |address| %>
+      <tr>
+        <td><%= address.id %></td>
+        <td><%= address.ipadd %></td>
+        <td><%= address.use %></td>
+        <td>
+	<% if address.status == 0%>
+		未利用
+	<% else %>
+		利用中
+	<% end %>
+	</td>
+        <td></td>
+        <td><%= address.updated_at %></td>
+        <td>
+        <% if address.status == 0%>
+	<%= link_to '利用開始', edit_address_path(address), class: 'btn btn-success btn-sm'  %>
+	<% else %>
+	<%= link_to '廃止する', address, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-sm btn-danger'  %>
+	<% end %>
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag import_addresses_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
