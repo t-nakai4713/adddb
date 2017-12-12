@@ -45,4 +45,5 @@ end
 
 gem 'jquery-turbolinks'
 gem 'twitter-bootstrap-rails'
+gem 'devise'
 
