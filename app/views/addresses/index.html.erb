@@ -1,6 +1,12 @@
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+
+<div class="container">
+  <div class="wrapper col-md-10 col-md-offset-1 col-sm-12">
 <h1>アドレス一覧</h1>
 
-<table class="table table-hover table-condensed">
+<table class="table table-hover table-condensed table-bordered">
   <thead class="thead-dark">
     <tr>
       <th>ID</th>
@@ -31,16 +37,25 @@
         <td>
         <% if address.status == 0%>
 	<%= link_to '利用開始', edit_address_path(address), class: 'btn btn-success btn-sm'  %>
+	<% elsif address.status == 1%>
+	<%= link_to '利用停止', edit_address_path(address), class: 'btn btn-danger btn-sm'  %>
 	<% else %>
-	<%= link_to '廃止する', address, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-sm btn-danger'  %>
+	※Status異常
 	<% end %>
 	</td>
       </tr>
     <% end %>
-  </tbody>
-</table>
 
 <%= form_tag import_addresses_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "インポート" %>
 <% end %>
+
+<div id="page-top-btn" class="page-top-btn">
+    <p><a class="move-page-top" id="move-page-top">▲</a></p>
+</div>
+
+  </tbody>
+</table>
+  </div>
+</div>
