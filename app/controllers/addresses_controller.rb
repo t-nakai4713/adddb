@@ -12,6 +12,7 @@ class AddressesController < ApplicationController
 
 def create
       @address = Address.new(addresses_params)
+      @address.user = current_user.id
    if @address.save
       redirect_to addresses_path, success: "投稿しました！"
    else
@@ -25,6 +26,7 @@ def create
 
   def update
     @address.update(addresses_params)
+    @address.user = current_user.id
     if @address.save
       # 一覧画面へ遷移して"ブログを編集しました！"とメッセージを表示します。
 #      redirect_to addresses_path, notice: "アドレス管理簿を更新しました！"
