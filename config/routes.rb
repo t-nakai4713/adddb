@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :addresses, only: [:index, :create, :edit, :update, :destroy] do
 	collection {post :import}
   end
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
   root 'top#index'
 
 
+  devise_for :users
 
 
 

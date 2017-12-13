@@ -1,5 +1,8 @@
 <% if notice %>
-  <p><%= notice %></p>
+  <div class="alert alert-info"><%= notice %></div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-warning"><%= alert %></div>
 <% end %>
   <section class="main-header">
   </section>
