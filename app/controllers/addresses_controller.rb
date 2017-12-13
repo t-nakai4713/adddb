@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
@@ -26,7 +27,7 @@ def create
 
   def update
     @address.update(addresses_params)
-    @address.user = current_user.id
+    @address.user_id = current_user.id
     if @address.save
       # 一覧画面へ遷移して"ブログを編集しました！"とメッセージを表示します。
 #      redirect_to addresses_path, notice: "アドレス管理簿を更新しました！"
@@ -41,7 +42,7 @@ def create
 
   private
     def addresses_params
-      params.require(:address).permit(:ipadd, :use, :status, :type,)
+      params.require(:address).permit(:ipadd, :use, :status, :type, :user_id)
     end
 
     def set_address

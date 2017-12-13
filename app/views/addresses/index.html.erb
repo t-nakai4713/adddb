@@ -25,15 +25,15 @@
         <td><%= address.id %></td>
         <td><%= address.ipadd %></td>
         <td><%= address.use %></td>
-        <td>
+	<td>
 	<% if address.status == 0%>
 		未利用
 	<% else %>
 		利用中
 	<% end %>
 	</td>
-        <td></td>
-        <td><%= address.updated_at %></td>
+        <td><%= address.user.name %></td>
+        <td><%= address.updated_at.in_time_zone('Tokyo').to_s %></td>
         <td>
         <% if address.status == 0%>
 	<%= link_to '利用開始', edit_address_path(address), class: 'btn btn-success btn-sm'  %>
