@@ -2,12 +2,21 @@
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
 
+<br/>
 <div class="container">
-  <div class="wrapper col-md-10 col-md-offset-1 col-sm-12">
-<h1>アドレス一覧</h1>
+   <div class="row">
+  <div class="wrapper col-md-10 icol-md-offset-1 col-sm-12">
+<H3><%= @address.addinfo.db_name %></H3>
+<P><%= simple_format(@address.addinfo.db_info) %></P>
+<div align="right">
+<%= link_to '編集', edit_addinfo_path(@address.addinfo_id), class: 'btn btn-link btn-sm' %>
+</div>
+ </div>
+</div>
 
-<table class="table table-hover table-condensed table-bordered">
-  <thead class="thead-dark">
+  <div class="wrapper col-md-10 col-md-offset-1 col-sm-12">
+  <table class="table table-hover table-condensed table-bordered">
+   <thead class="thead-dark">
     <tr>
       <th>ID</th>
       <th>IPアドレス</th>
@@ -32,7 +41,13 @@
 		利用中
 	<% end %>
 	</td>
-        <td><%= address.user.name %></td>
+        <td>
+	<% if address.user_id.nil? %>
+	-	
+	<% else %>
+	<%= address.user.name %>
+	<% end %>
+	</td>
         <td><%= address.updated_at.in_time_zone('Tokyo').to_s %></td>
         <td>
         <% if address.status == 0%>
@@ -45,17 +60,21 @@
 	</td>
       </tr>
     <% end %>
+  </tbody>
+</table>
 
+<H3>データベースを一括更新する</H3>
+<P>UTF-8・カンマ区切りのCSVファイルを読み込ませること。<br>
+<%= link_to "CSVフォーマットを確認(右クリックで保存)", "/addresses/downloadformat/" %></P>
 <%= form_tag import_addresses_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "インポート" %>
 <% end %>
+</div>
+
 
 <div id="page-top-btn" class="page-top-btn">
     <p><a class="move-page-top" id="move-page-top">▲</a></p>
 </div>
 
-  </tbody>
-</table>
-  </div>
 </div>

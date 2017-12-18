@@ -1,6 +1,9 @@
 class Address < ActiveRecord::Base
 
-  def self.import(file)
+  belongs_to :user
+  belongs_to :addinfo
+
+def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       # IDが見つかれば、レコードを呼び出し、見つかれなければ、新しく作成
       address = find_by(id: row["id"]) || new
@@ -13,10 +16,9 @@ class Address < ActiveRecord::Base
 
   # 更新を許可するカラムを定義
   def self.updatable_attributes
-    ["address", "use", "status", "type"]
+    ["ipadd", "use", "status", "addinfo_id"]
   end
 
 
-  belongs_to :user
 
 end
