@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'addresses/downloadformat'=> 'addresses#downloadformat'
+
   resources :addresses, only: [:index, :create, :edit, :update, :destroy] do
 	collection {post :import}
+  end
+
+  resources :addinfos, only: [:edit, :update]do
   end
 
   root 'top#index'

@@ -4,12 +4,24 @@ class AddressesController < ApplicationController
 
   def index
 	@addresses = Address.all
+	@address = Address.find(1)
   end
 
+#CSVインポート
  def import
     Address.import(params[:file])
     redirect_to addresses_path, notice: "アドレスデータをCSVから読み込みました"
  end
+
+#CSVフォーマットファイルのダウンロード
+def downloadformat
+  file_name="fileformat.csv"
+  filepath = Rails.root.join('public',file_name)
+  stat = File::stat(filepath)
+  send_file(filepath, :filename => file_name, :length => stat.size, :disposition => 'attachment')
+end
+
+
 
 def create
       @address = Address.new(addresses_params)
@@ -42,7 +54,7 @@ def create
 
   private
     def addresses_params
-      params.require(:address).permit(:ipadd, :use, :status, :type, :user_id)
+      params.require(:address).permit(:ipadd, :use, :status, :addinfo_id, :user_id)
     end
 
     def set_address

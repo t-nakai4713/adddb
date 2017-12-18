@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  db_name: MyString
+  db_info: MyText
+  text_tpl1: MyString
+  text_tpl2: MyString
+
+two:
+  db_name: MyString
+  db_info: MyText
+  text_tpl1: MyString
+  text_tpl2: MyString

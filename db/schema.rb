@@ -11,16 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213044936) do
+ActiveRecord::Schema.define(version: 20171213073004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addinfos", force: :cascade do |t|
+    t.string   "db_name",    default: "DB名称"
+    t.text     "db_info",    default: "DB用途説明"
+    t.string   "text_tpl1"
+    t.string   "text_tpl2"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "address_id"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.inet     "ipadd"
     t.string   "use",        default: "free"
     t.integer  "status",     default: 0,      null: false
-    t.integer  "dbtype"
+    t.integer  "addinfo_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
