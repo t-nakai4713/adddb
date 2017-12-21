@@ -45,6 +45,9 @@ group :development, :test do
   gem 'letter_opener_web'
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'rails-erd'
+  gem "graphviz"
+  gem "railroady"
 end
 
 gem 'jquery-turbolinks'
