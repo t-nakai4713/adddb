@@ -22,34 +22,97 @@ def downloadformat
 end
 
 
-
-def create
-      @address = Address.new(addresses_params)
-      @address.user = current_user.id
-   if @address.save
-      redirect_to addresses_path, success: "投稿しました！"
-   else
-     @addresses = Address.all
-     render 'index'
-   end
-  end
-
   def edit
   end
 
   def update
+   if params[:DL_button]
+	#IPAddr形式のアドレスデータをstringに変換、置換対象の文字列を指定
+        tmpipadd = @address.ipadd
+        ipadd = tmpipadd.to_s
+        ptn = "xipaddx"
+
+        #テキストテンプレートの読み込み
+        if @address.status == 0
+	        #現在未利用（利用開始する）場合はtext_tpl1を読み込み
+	        texttpl = @address.addinfo.text_tpl1
+        else
+	        #現在利用中（廃止する）場合はtext_tpl2を読み込み
+	        texttpl = @address.addinfo.text_tpl2
+        end
+
+        #テキストテンプレートの読み込み、文中の文字列をアドレスに置換
+        tplpath = Rails.root.join('public',texttpl)
+        tpl = File.open(tplpath,"r")
+        buffer =tpl.read
+        buffer.gsub!(ptn, ipadd)
+
+        #出力用テキストファイルを作成・書き込み 
+	textfile = "text.txt"
+        textpath = Rails.root.join('public',textfile)
+        tmptext = File.open(textpath,"w")
+        tmptext.write(buffer)
+
+	#テキストテンプレート、出力用テキストを閉じる
+        tpl.close()
+        tmptext.close()
+
+	#出力用テキストの保存ダイアログを表示
+	send_file(textpath , disposition: "attachment")
+	return
+   else
     @address.update(addresses_params)
     @address.user_id = current_user.id
     if @address.save
-      # 一覧画面へ遷移して"ブログを編集しました！"とメッセージを表示します。
-#      redirect_to addresses_path, notice: "アドレス管理簿を更新しました！"
       flash[:info] = "利用状況を更新しました"
       redirect_to addresses_path
+      return
     else
      # 入力フォームを再描画します。
      render 'edit'
+     return
     end
+
+   end
   end
+
+
+def downloadtext
+	#IPAddr形式のアドレスデータをstringに変換、置換対象の文字列を指定
+        tmpipadd = @address.ipadd
+        ipadd = tmpipadd.to_s
+        ptn = "xipaddx"
+
+        #テキストテンプレートの読み込み
+        if @address.status == 0
+	        #廃止する場合はtext_tpl2を読み込み
+	        texttpl = @address.addinfo.text_tpl2
+        else
+	        #利用する場合はtext_tpl1を読み込み
+	        texttpl = @address.addinfo.text_tpl1
+        end
+
+        #テキストテンプレートの読み込み、文中の文字列をアドレスに置換
+        tplpath = Rails.root.join('public',texttpl)
+        tpl = File.open(tplpath,"r")
+        buffer =tpl.read
+        buffer.gsub!(ptn, ipadd)
+
+        #出力用テキストファイルを作成・書き込み 
+	textfile = "text.txt"
+        textpath = Rails.root.join('public',textfile)
+        tmptext = File.open(textpath,"w")
+        tmptext.write(buffer)
+
+	#テキストテンプレート、出力用テキストを閉じる
+        tpl.close()
+        tmptext.close()
+
+	#出力用テキストの保存ダイアログを表示
+	send_file(textpath , disposition: "attachment")
+end
+
+
 
 
   private

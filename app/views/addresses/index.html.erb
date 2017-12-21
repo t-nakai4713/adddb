@@ -48,7 +48,7 @@
 	<%= address.user.name %>
 	<% end %>
 	</td>
-        <td><%= address.updated_at.in_time_zone('Tokyo').to_s %></td>
+	<td><%= address.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></td>
         <td>
         <% if address.status == 0%>
 	<%= link_to '利用開始', edit_address_path(address), class: 'btn btn-success btn-sm'  %>
@@ -64,7 +64,8 @@
 </table>
 
 <H3>データベースを一括更新する</H3>
-<P>UTF-8・カンマ区切りのCSVファイルを読み込ませること。<br>
+<P>既存アドレス情報の変更、及び新しいアドレスを追加することが出来ます。<br>
+UTF-8・カンマ区切りのCSVファイルを読み込ませて下さい。<br>
 <%= link_to "CSVフォーマットを確認(右クリックで保存)", "/addresses/downloadformat/" %></P>
 <%= form_tag import_addresses_path, multipart: true do %>
   <%= file_field_tag :file %>

@@ -1,0 +1,8 @@
+□確認
+show ip route xipaddx
+
+■入力
+no ip route xipaddx 255.255.255.255 192.168.0.254
+
+□確認
+show ip route xipaddx

@@ -10,7 +10,8 @@
 </div>
   <%= f.hidden_field :dbtype, value: 1  %>
   <%= f.hidden_field :status, value: 1 %> <br>
-  <%= f.submit '利用開始', class: 'btn btn-success btn-lg' %>
+  <P><%= f.submit '設定手順書DL', name: "DL_button", class: 'btn btn-info btn-lg' %></P>
+  <%= f.submit '利用開始', class: 'btn btn-success btn-lg',  data: { confirm: '設定手順書はDL済みですか？'} %>
   <%= link_to '戻る', addresses_path, class: 'btn btn-secondary btn-lg'  %>
 
   <% else %>
@@ -21,7 +22,8 @@
   <%= f.hidden_field :use, value: "free"  %>
   <%= f.hidden_field :dbtype, value: 1  %>
   <%= f.hidden_field :status, value: 0 %>
-  <%= f.submit '廃止する', class: 'btn btn-danger btn-lg' %>
+  <P><%= f.submit '設定手順書DL', name: "DL_button", class: 'btn btn-info btn-lg' %></P>
+  <%= f.submit '廃止する', class: 'btn btn-danger btn-lg', data: { confirm: '設定手順書はDL済みですか？'} %>
   <%= link_to '戻る', addresses_path, class: 'btn btn-secondary btn-lg'  %>
 
   <% end %>
