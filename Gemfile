@@ -43,6 +43,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'letter_opener_web'
+  gem 'pry-rails'
+  gem 'better_errors'
 end
 
 gem 'jquery-turbolinks'

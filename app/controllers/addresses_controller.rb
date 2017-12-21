@@ -10,7 +10,8 @@ class AddressesController < ApplicationController
 #CSVインポート
  def import
     Address.import(params[:file])
-    redirect_to addresses_path, notice: "アドレスデータをCSVから読み込みました"
+    flash[:info] = "アドレスデータをCSVから読み込みました"
+    redirect_to addresses_path
  end
 
 #CSVフォーマットファイルのダウンロード
@@ -48,7 +49,7 @@ end
         buffer.gsub!(ptn, ipadd)
 
         #出力用テキストファイルを作成・書き込み 
-	textfile = "text.txt"
+	textfile = "config.txt"
         textpath = Rails.root.join('public',textfile)
         tmptext = File.open(textpath,"w")
         tmptext.write(buffer)
