@@ -16,7 +16,7 @@
   ipadd = add1 + add2.to_s + add3
 
   if using_status ==0
-	
+	use = "free"	
   else
 	use = Faker::Pokemon.location
 	user_id = Faker::Number.between(1,10)

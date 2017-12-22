@@ -65,9 +65,9 @@
 
 <H3>データベースを一括更新する</H3>
 <P>既存アドレス情報の変更、及び新しいアドレスを追加することが出来ます。<br>
-使い方・CSVのフォーマットは下記リンクから、右クリックで保存して下さい。</P>
+使い方・CSVサンプルは下記リンクから、右クリックで保存して下さい。</P>
 <%= link_to "使い方", getmanual_addresses_path, class: "btn btn-mini btn-link" %>
-<%= link_to "CSVフォーマット", getformat_addresses_path, class: "btn btn-mini btn-link" %>
+<%= link_to "CSVサンプル", getformat_addresses_path, class: "btn btn-mini btn-link" %>
 <%= form_tag import_addresses_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "インポート" %>
