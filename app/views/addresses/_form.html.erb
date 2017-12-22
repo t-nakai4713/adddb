@@ -16,7 +16,7 @@
 
   <% else %>
   <div class="form-group">
-   <label>利用用途</label></br>
+   <label>利用用途(廃止時に消去されます)</label></br>
    <%= @address.use  %></P>
   </div>
   <%= f.hidden_field :use, value: "free"  %>

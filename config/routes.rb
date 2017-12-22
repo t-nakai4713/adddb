@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'addresses/downloadformat'=> 'addresses#downloadformat'
+ # get 'addresses/downloadformat'=> 'addresses#downloadformat'
 
   resources :addresses, only: [:index, :create, :edit, :update, :destroy] do
 	collection {post :import}
+	collection {get :getformat}
+	collection {get :getmanual}
   end
 
   resources :addinfos, only: [:edit, :update]do

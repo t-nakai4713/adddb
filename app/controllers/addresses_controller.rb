@@ -14,13 +14,21 @@ class AddressesController < ApplicationController
     redirect_to addresses_path
  end
 
-#CSVフォーマットファイルのダウンロード
-def downloadformat
-  file_name="fileformat.csv"
-  filepath = Rails.root.join('public',file_name)
-  stat = File::stat(filepath)
-  send_file(filepath, :filename => file_name, :length => stat.size, :disposition => 'attachment')
-end
+#インポート用CSVファイルの書き方お作法
+ def getmanual
+    csv_name = "manual.txt"
+    csvpath = Rails.root.join('public',csv_name)
+    send_file(csvpath , disposition: "attachment")
+ end
+
+#CSVフォーマットファイルのDL
+ def getformat
+    csv_name = "format.csv"
+    csvpath = Rails.root.join('public',csv_name)
+    send_file(csvpath , disposition: "attachment")
+ end
+
+
 
 
   def edit
